@@ -9,11 +9,13 @@ namespace MVC_Counter.Controllers
 {
     public class HomeController : Controller
     {
-        ICounter _iCounter = null;
-        public HomeController(ICounter iCounter)
+
+        private readonly ICounterDAL _iCounter = null;
+        public HomeController(ICounterDAL iCounter)
         {
-            _iCounter = iCounter;
+            this._iCounter = iCounter;
         }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -26,11 +28,9 @@ namespace MVC_Counter.Controllers
         [ActionName("Index")]
         public ActionResult IndexPost()
         {
-            var number = _iCounter.IncreaseValue();
+            var number = _iCounter.Increase();
             ViewBag.counterNumber = number;
             return View();
         }
-
-
     }
 }

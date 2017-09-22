@@ -5,14 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVC_Counter.DAL
+namespace MVC_Counter.Services
 {
-    public interface ICounter
+    public interface ICounterService
     {
-        Counter GetFirstValue();
-        void Add(Counter entity);
-        void Save();
         Counter GetCurrentValue();
-        int IncreaseValue();
+        int Increase();
     }
 }

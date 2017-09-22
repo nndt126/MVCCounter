@@ -224,8 +224,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\CounterDAL.cs" />
-    <Compile Include="DAL\ICounter.cs" />
+    <Compile Include="DAL\ICounterDAL.cs" />
     <Compile Include="DBContext\CounterContext.cs" />
+    <Compile Include="DBContext\ICounterContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +235,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CounterService.cs" />
+    <Compile Include="Services\ICounterService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

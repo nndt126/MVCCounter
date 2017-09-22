@@ -8,15 +8,33 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace MVC_Counter.DBContext
 {
-    public class CounterContext : DbContext
+    public class CounterContext : DbContext, ICounterContext
     {
         public CounterContext()
             : base("name=DefaultConnection")
         {
-            //Database.SetInitializer<CounterContext>(null);
-            Database.SetInitializer(new CreateDatabaseIfNotExists<CounterContext>());
+            try
+            {
+                Database.SetInitializer<CounterContext>(null);
+                Database.SetInitializer(new CreateDatabaseIfNotExists<CounterContext>());
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            
         }
-        public DbSet<Counter> Counters { get; set; }
+
+       
+
+        public virtual DbSet<Counter> Counters { get; set; }
+
+        public Counter GetValue()
+        {
+            var result = Counters.FirstOrDefault();
+            return result;
+        }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

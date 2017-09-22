@@ -7,49 +7,64 @@ using System.Web;
 
 namespace MVC_Counter.DAL
 {
-    public class CounterDAL : ICounter
+    public class CounterDAL : ICounterDAL
     {
-        private readonly CounterContext counterDbContext;
+        private readonly ICounterContext _iCounterDbContext;
+        //private readonly CounterContext counterDbContext;
 
         public CounterDAL()
         {
-            counterDbContext = new CounterContext();
+            _iCounterDbContext = new CounterContext();
         }
-        public Counter GetFirstValue()
+
+        public CounterDAL(ICounterContext iCounterDbContext)
         {
-            var result = counterDbContext.Counters.FirstOrDefault();
+            _iCounterDbContext = iCounterDbContext;
+        }
+
+        
+        public Counter GetValue()
+        {
+            var result = _iCounterDbContext.Counters.FirstOrDefault();
             return result;
         }
 
-        public void Add(Counter entity)
+        public void CreateData(Counter entity)
         {
-            counterDbContext.Counters.Add(entity);
+            _iCounterDbContext.Counters.Add(entity);
         }
 
-        public void Save()
+        public void SaveData()
         {
-            counterDbContext.SaveChanges();
+            _iCounterDbContext.SaveChanges();
+            //counterDbContext.SaveChanges();
         }
 
         public Counter GetCurrentValue()
-        { 
-            return GetFirstValue() ?? new Counter() { CounterNumber = 0 };
+        {
+            Counter result = GetValue();
+            if (result == null)
+            {
+                result = new Counter() { CounterNumber = 0 };
+            }
+            return result;
+
         }
 
-        public int IncreaseValue()
+        public int Increase()
         {
             try
             {
                 Counter counter = GetCurrentValue();
                 if (counter.CounterNumber == 0)
                 {
-                    Add(counter);
+                    CreateData(counter);
                 }
 
                 if (counter.CounterNumber < 10)
                 {
                     counter.CounterNumber++;
-                    Save();
+                    SaveData();
                 }
                 return counter.CounterNumber;
             }

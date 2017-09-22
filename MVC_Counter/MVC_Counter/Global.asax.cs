@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using MVC_Counter.DAL;
+using MVC_Counter.DBContext;
 
 namespace MVC_Counter
 {
@@ -22,8 +23,8 @@ namespace MVC_Counter
 
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
-            builder.RegisterType<CounterDAL>().As<ICounter>();
+            builder.RegisterType<CounterDAL>().As<ICounterDAL>();
+            builder.RegisterType<CounterContext>().As<ICounterContext>();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
