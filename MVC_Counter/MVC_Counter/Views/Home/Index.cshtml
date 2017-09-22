@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Counter MVC Application";
+}
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading panelCounter">Counter Application</div>
+                <div class="panel-body panelCounter">
+                    <label class="labelCounter"> @ViewBag.counterNumber </label>
+                    <br />
+                    <input id="btnIncrease" type="submit" value="Increase" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if(@ViewBag.counterNumber >= 10){
+            $('#btnIncrease').prop('disabled', true);
+        }
+    });
+
+</script>
