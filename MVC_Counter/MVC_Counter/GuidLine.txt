@@ -1,0 +1,14 @@
+Cannot attach the file 'C:\XXX\aspnet-MVC_Counter-20170921084732.mdf' as database 'aspnet-MVC_Counter-20170921084732'.
+
+1. Turn off Visual
+2. Turn on Developer Command Prompt for Visual Studio
+https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs
+3. Run the following commands :
+sqllocaldb.exe stop MSSQLLocalDB
+sqllocaldb.exe delete MSSQLLocalDB
+
+Cannot be opened because it is version 852.
+Run cmd
+1> cd C:\Program Files\Microsoft SQL Server\130\LocalDB\Binn
+2> SqlLocalDB.exe delete "MSSQLLocalDB"
+3> SqlLocalDB.exe create "MSSQLLocalDB

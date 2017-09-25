@@ -12,6 +12,6 @@ namespace MVC_Counter.DBContext
     {
         DbSet<Counter> Counters { get; set; }
         int SaveChanges();
-        Counter GetValue();
+        //Counter GetValue();
     }
 }

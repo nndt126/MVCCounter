@@ -10,30 +10,23 @@ namespace MVC_Counter.DBContext
 {
     public class CounterContext : DbContext, ICounterContext
     {
+        static CounterContext()
+        {
+            Database.SetInitializer<CounterContext>(null);
+            Database.SetInitializer<CounterContext>(new CreateDatabaseIfNotExists<CounterContext>());
+        }
         public CounterContext()
             : base("name=DefaultConnection")
         {
-            try
-            {
-                Database.SetInitializer<CounterContext>(null);
-                Database.SetInitializer(new CreateDatabaseIfNotExists<CounterContext>());
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-            
         }
-
-       
 
         public virtual DbSet<Counter> Counters { get; set; }
 
-        public Counter GetValue()
-        {
-            var result = Counters.FirstOrDefault();
-            return result;
-        }
+        //public Counter GetValue()
+        //{
+        //    var result = Counters.FirstOrDefault();
+        //    return result;
+        //}
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
